@@ -14,8 +14,6 @@ int main(void)
 	while (a <= '9')
 	{
 		write(1, &a, 1);
-
-	if (a != '9')
 		write(1, ", ", 2);
 		a++;
 	}
