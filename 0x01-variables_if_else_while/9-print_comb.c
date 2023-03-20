@@ -1,4 +1,3 @@
-#include <unistd.h>
 #include <stdio.h>
 
 /**
@@ -10,12 +9,14 @@ int main(void)
 {
 	int a;
 
-	a = '0';
-	while (a <= '9')
+	for (a = 0; a <= 9; a++)
 	{
-		write(1, &a, 1);
-		write(1, ", ", 2);
-		a++;
+		putchar((a % 10) + '0');
+		if (a == 9)
+			continue;
+
+		putchar(',');
+		putchar(' ');
 	}
 
 	putchar('\n');
