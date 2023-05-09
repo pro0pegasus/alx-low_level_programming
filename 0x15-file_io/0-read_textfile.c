@@ -5,7 +5,7 @@
  * PoSIX standard output.
  * @filename: the file to read
  * @letters: number of letters to read
- * Return: number of letters printed 
+ * Return: number of letters printed | (otherwise) 0
  * @By Yassine Borak
  */
 ssize_t read_textfile(const char *filename, size_t letters)
