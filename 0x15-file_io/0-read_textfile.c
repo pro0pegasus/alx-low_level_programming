@@ -1,38 +1,29 @@
 #include "main.h"
+#include <stdlib.h>
 
 /**
- * read_textfile - read a text file and print it to
- * PoSIX standard output.
- * @filename: the file to read
- * @letters: number of letters to read
- * Return: number of letters printed | (otherwise) 0
+ * read_textfile- Read text file print to STDOUT.
+ * @filename: text file being read
+ * @letters: number of letters to be read
+ * Return: w- actual number of bytes read and printed
+ *        0 when function fails or filename is NULL.
  * @By Yassine Borak
- */
+*/
 ssize_t read_textfile(const char *filename, size_t letters)
 {
-	int fd, rc, count = 0;
-	char *buff;
-
-	if (filename == NULL || letters == 0)
-		return (0);
+	char *buf;
+	ssize_t fd;
+	ssize_t w;
+	ssize_t t;
 
 	fd = open(filename, O_RDONLY);
 	if (fd == -1)
 		return (0);
+	buf = malloc(sizeof(char) * letters);
+	t = read(fd, buf, letters);
+	w = write(STDOUT_FILENO, buf, t);
 
-	buff = malloc(sizeof(char) * letters);
-	if (buff == NULL)
-		return (0);
-
-	rc = read(fd, buff, letters);
-	if (rc == -1)
-		return (0);
-
-	count = write(STDOUT_FILENO, buff, rc);
-	if (count == -1 || count != rc)
-		return (0);
-
-	free(buff);
+	free(buf);
 	close(fd);
-	return (count);
+	return (w);
 }
